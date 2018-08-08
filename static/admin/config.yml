@@ -1,0 +1,44 @@
+backend:
+  name: github
+  repo: mabhub/so-vtt
+
+media_folder: static/assets
+public_folder: /assets
+
+slug:
+  encoding: 'ascii'
+  clean_accents: true
+
+collections:
+  - name: event
+    label: Rando VTT
+    folder: src/events
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    create: true
+    editor: { preview: false }
+    fields:
+      - { name: title, label: Titre de l'événement }
+      - { name: date, label: Date de l'événement, widget: datetime }
+      - { name: commune, label: Lieu de l'événement }
+      - { name: departement, label: Département }
+      - name: inscriptions
+        label: Coût de l'inscription
+        widget: list
+        default: ['x €']
+      - name: boucles
+        label: boucles
+        widget: list
+        fields:
+        - name: distance
+          label: Distance (en km)
+          widget: number
+        - name: sport
+          label: Pratique
+          widget: select
+          default: vtt
+          options:
+          - { label: VTT, value: vtt }
+          - { label: Marche, value: marche }
+          - { label: Trail, value: trail }
+      - { name: body, label: Description, widget: markdown }
+
