@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "author": "Benjamin Marguin <git@ma-b.com>",
   "bugs": {
-    "url": "https://github.com/mabhub/agenda-vtt/issues"
+    "url": "https://github.com/mabhub/so-vtt/issues"
   },
   "dependencies": {
     "classnames": "~2.2.6",
@@ -39,7 +39,7 @@
     "eslint-plugin-react": "~7.10.0",
     "gh-pages": "~1.2.0"
   },
-  "homepage": "https://github.com/mabhub/agenda-vtt",
+  "homepage": "https://github.com/mabhub/so-vtt",
   "keywords": [
     "vtt"
   ],
@@ -47,7 +47,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mabhub/agenda-vtt.git"
+    "url": "git+https://github.com/mabhub/so-vtt.git"
   },
   "scripts": {
     "start": "gatsby develop",
