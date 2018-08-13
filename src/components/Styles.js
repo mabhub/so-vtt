@@ -64,6 +64,7 @@ export const Title = styled.div`
 export const Label = styled.span`
   background: ${({ color }) => color || '#ddd'};
   border-radius: .5em;
+  border: 1px solid transparent;
   display: inline-block;
   font-family: sans;
   font-size: .75em;

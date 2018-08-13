@@ -52,7 +52,7 @@ const Event = props => {
         <LabelGroup items={distancesCyclo} icon={<Cycliste vtt={false} />} color="#8cd" tooltip="Cyclo" />
         <LabelGroup items={distancesMarche} icon={<Marcheur />} color="#ece" tooltip="Marche" />
         <LabelGroup items={distancesTrail} icon={<Coureur />} color="#ec8" tooltip="Trail / Cross" />
-        <LabelGroup items={props.frontmatter.inscriptions} tooltip="Inscription" />
+        <LabelGroup items={props.frontmatter.inscriptions} color="#bfb" tooltip="Inscription" />
       </div>
     </Styled.Event>
   );
@@ -83,7 +83,7 @@ const Legende = () => (
     <LabelGroup items={['Cyclo']} icon={<Cycliste vtt={false} />} color="#8cd" tooltip="Cyclo" />
     <LabelGroup items={['Marche']} icon={<Marcheur />} color="#ece" tooltip="Marche" />
     <LabelGroup items={['Trail']} icon={<Coureur />} color="#ec8" tooltip="Trail / Cross" />
-    <LabelGroup items={['Inscription']} tooltip="Inscription" />
+    <LabelGroup items={['Inscription']} color="#bfb" tooltip="Inscription" />
   </Styled.Legende>
 );
 
