@@ -1,19 +1,19 @@
 import React from 'react';
 
-import { Label } from './Styles';
+import * as Styled from '../components/Styles';
 
 const LabelGroup = ({ items, icon, color, tooltip }) => (
-  <span>
+  <Styled.LabelGroup>
     {items && items.map(item => (
-      <Label
+      <Styled.Label
         key={item}
         color={color}
         title={tooltip}
       >
         {icon} {item}
-      </Label>
+      </Styled.Label>
     ))}
-  </span>
+  </Styled.LabelGroup>
 );
 
 export default LabelGroup;

@@ -19,25 +19,36 @@ export const Month = styled.div`
 `;
 
 export const CalenDay = styled.div`
-  background: #eee;
-  border-radius: .35rem;
   font-size: .8em;
   font-family: Montserrat, sans-serif;
   line-height: 1.2;
-  padding: .5em;
   text-align: center;
   width: 6.5em;
   cursor: default;
 
+  .weekDay {
+    background: rgba(0, 0, 0, .1);
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+    padding: .2em 0;
+  }
+
   .monthDay {
+    border: solid rgba(0, 0, 0, .1);
+    border-width: 0 1px 0 1px;
     font-size: 3em;
-    display: inline-block;
-    line-height: 1;
     letter-spacing: .05em;
+    line-height: 1;
+    padding: .1em 0;
   }
 
   .month {
+    background: rgba(235, 0, 0, .75);
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+    color: white;
     font-weight: bold;
+    padding: .15em 0;
   }
 
   span {
@@ -61,16 +72,42 @@ export const Title = styled.div`
   line-height: 1;
 `;
 
+export const Emoji = styled.span`
+  background: white;
+  /* display: inline-block; */
+  border-radius: .5em;
+  padding: 0 .35em;
+  margin-left: -.5em;
+`;
+
+export const LabelGroup = styled.span`
+  border: 1px solid transparent;
+`;
+
 export const Label = styled.span`
   background: ${({ color }) => color || '#ddd'};
-  border-radius: .5em;
+  /* border-radius: .5em; */
   border: 1px solid transparent;
   display: inline-block;
   font-family: sans;
   font-size: .75em;
-  margin-right: .5em;
+  margin-right: 1px;
   padding: 0 .5em;
   cursor: default;
+  ${Emoji} {
+    display: none;
+  }
+  &:first-child {
+    border-top-left-radius: .5em;
+    border-bottom-left-radius: .5em;
+    ${Emoji} {
+      display: inline-block;
+    }
+  }
+  &:last-child {
+    border-top-right-radius: .5em;
+    border-bottom-right-radius: .5em;
+  }
 `;
 
 export const Event = styled.div`

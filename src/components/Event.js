@@ -40,12 +40,13 @@ const Event = props => {
 
         <Styled.Title>{props.frontmatter.title}</Styled.Title>
 
-        <LabelGroup items={[time]} tooltip="Départ à…" />
         <LabelGroup items={distancesVTT} icon={<Cycliste />} color="#aaf" tooltip="VTT" />
         <LabelGroup items={distancesCyclo} icon={<Cycliste vtt={false} />} color="#8cd" tooltip="Cyclo" />
         <LabelGroup items={distancesMarche} icon={<Marcheur />} color="#ece" tooltip="Marche" />
         <LabelGroup items={distancesTrail} icon={<Coureur />} color="#ec8" tooltip="Trail / Cross" />
-        <LabelGroup items={props.frontmatter.inscriptions} color="#bfb" tooltip="Inscription" />
+        <br />
+        <LabelGroup items={[time]} color="#eee" tooltip="Départ à…" />
+        <LabelGroup items={props.frontmatter.inscriptions} color="#eee" tooltip="Inscription" />
       </div>
     </Styled.Event>
   );

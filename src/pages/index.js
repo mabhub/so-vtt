@@ -15,12 +15,12 @@ moment.locale('fr');
 
 const Legende = () => (
   <Styled.Legende>
-    <LabelGroup items={['Départ']} tooltip="Départ" />
+    {/* <LabelGroup items={['Départ']} tooltip="Départ" /> */}
     <LabelGroup items={['VTT']} icon={<Cycliste />} color="#aaf" tooltip="VTT" />
     <LabelGroup items={['Cyclo']} icon={<Cycliste vtt={false} />} color="#8cd" tooltip="Cyclo" />
     <LabelGroup items={['Marche']} icon={<Marcheur />} color="#ece" tooltip="Marche" />
     <LabelGroup items={['Trail']} icon={<Coureur />} color="#ec8" tooltip="Trail / Cross" />
-    <LabelGroup items={['Inscription']} color="#bfb" tooltip="Inscription" />
+    {/* <LabelGroup items={['Inscription']} color="#bfb" tooltip="Inscription" /> */}
   </Styled.Legende>
 );
 

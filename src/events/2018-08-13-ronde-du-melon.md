@@ -6,7 +6,7 @@ departement: '32'
 boucles:
   - distance: '19'
   - distance: '33'
-  - distance: ''
+  - distance: '10.5'
     sport: marche
   - distance: '39'
     sport: cyclo
