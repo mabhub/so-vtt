@@ -82,6 +82,7 @@ export const Emoji = styled.span`
 
 export const LabelGroup = styled.span`
   border: 1px solid transparent;
+  margin-right: .25em;
 `;
 
 export const Label = styled.span`
