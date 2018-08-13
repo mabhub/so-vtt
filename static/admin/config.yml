@@ -21,10 +21,6 @@ collections:
       - { name: date, label: Date de l'événement, widget: datetime }
       - { name: commune, label: Lieu de l'événement }
       - { name: departement, label: Département }
-      - name: inscriptions
-        label: Coût de l'inscription
-        widget: list
-        default: ['x €']
       - name: boucles
         label: boucles
         widget: list
@@ -38,7 +34,12 @@ collections:
           default: vtt
           options:
           - { label: VTT, value: vtt }
+          - { label: Cyclo, value: cyclo }
           - { label: Marche, value: marche }
           - { label: Trail, value: trail }
-      - { name: body, label: Description, widget: markdown }
+      - name: inscriptions
+        label: Coût de l'inscription
+        widget: list
+        default: ['x €']
+      - { name: body, label: Description, widget: markdown, required: false }
 

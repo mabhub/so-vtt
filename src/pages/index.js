@@ -18,6 +18,22 @@ const Event = props => {
   const date = moment(props.frontmatter.date);
   const time = date.format('HH[h]mm');
 
+  const distancesVTT = props.frontmatter.boucles
+    .filter(({ sport }) => !sport || sport === 'vtt')
+    .map(item => `${item.distance} km`);
+
+  const distancesCyclo = props.frontmatter.boucles
+    .filter(({ sport }) => sport === 'cyclo')
+    .map(item => `${item.distance} km`);
+
+  const distancesMarche = props.frontmatter.boucles
+    .filter(({ sport }) => sport === 'marche')
+    .map(item => `${item.distance} km`);
+
+  const distancesTrail = props.frontmatter.boucles
+    .filter(({ sport }) => sport === 'trail')
+    .map(item => `${item.distance} km`);
+
   return (
     <Styled.Event>
       <CalenDay
@@ -32,8 +48,10 @@ const Event = props => {
         <Styled.Title>{props.frontmatter.title}</Styled.Title>
 
         <LabelGroup items={[time]} tooltip="Départ à…" />
-        <LabelGroup items={props.frontmatter.distances} icon={<Cycliste />} color="#aaf" tooltip="VTT" />
-        <LabelGroup items={props.frontmatter.pedestre} icon={<Marcheur />} color="#ece" tooltip="Marche" />
+        <LabelGroup items={distancesVTT} icon={<Cycliste />} color="#aaf" tooltip="VTT" />
+        <LabelGroup items={distancesCyclo} icon={<Cycliste vtt={false} />} color="#8cd" tooltip="Cyclo" />
+        <LabelGroup items={distancesMarche} icon={<Marcheur />} color="#ece" tooltip="Marche" />
+        <LabelGroup items={distancesTrail} icon={<Coureur />} color="#ec8" tooltip="Trail / Cross" />
         <LabelGroup items={props.frontmatter.inscriptions} tooltip="Inscription" />
       </div>
     </Styled.Event>
@@ -113,12 +131,13 @@ export const pageQuery = graphql`
             day: date(formatString: "YYYY-MM-DD")
             date
             title
-            distances
             inscriptions
-            distances
             commune
             departement
-            pedestre
+            boucles {
+              distance
+              sport
+            }
           }
         }
       }
