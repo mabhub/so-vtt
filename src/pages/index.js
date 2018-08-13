@@ -6,31 +6,12 @@ import moment from 'moment';
 import Intro from '../components/Intro';
 import * as Styled from '../components/Styles';
 import LabelGroup from '../components/LabelGroup';
-import Event from '../components/Event';
+
+import EventList from '../components/EventList';
 
 import { Cycliste, Marcheur, Coureur } from '../components/emojis';
 
 moment.locale('fr');
-
-const MonthTitle = props => <Styled.Month>{props.month}</Styled.Month>;
-
-const EventList = ({ events }) => (
-  <div>
-    {events.reduce((acc, node) => {
-      const prepend = [];
-
-      if (node.newMonth) {
-        prepend.push(<MonthTitle key={node.frontmatter.month} month={moment(node.frontmatter.date).format('MMMM YYYY')} />);
-      }
-
-      return [
-        ...acc,
-        ...prepend,
-        <Event key={node.frontmatter.title} {...node} />,
-      ];
-    }, [])}
-  </div>
-);
 
 const Legende = () => (
   <Styled.Legende>
