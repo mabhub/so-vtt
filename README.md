@@ -8,5 +8,6 @@ Il est libre et ouvert à la contribution communautaire.
 ## Dispositif technique
 
 Le site est généré grace à [GatsbyJS](https://www.gatsbyjs.org/). Chacun des
-évènements est renseigné sous la forme d'un dossier contenant un fichier
-[Markdown](https://fr.wikipedia.org/wiki/Markdown), placés dans `src/events/`.
+évènements est renseigné sous la forme d'un fichier
+[Markdown](https://fr.wikipedia.org/wiki/Markdown) placé dans
+[`src/events/`](src/events).
