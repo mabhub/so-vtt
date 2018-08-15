@@ -38,5 +38,6 @@ collections:
           - { label: Marche, value: marche }
           - { label: Trail, value: trail }
       - { name: inscriptions, label: Coût de l'inscription, widget: list, default: ['x €'] }
+      - { name: link, label: Lien vers l'événement ou l'affiche }
       - { name: body, label: Description, widget: markdown, required: false }
 
