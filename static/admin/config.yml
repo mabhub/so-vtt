@@ -37,7 +37,7 @@ collections:
           - { label: Cyclo, value: cyclo }
           - { label: Marche, value: marche }
           - { label: Trail, value: trail }
-      - { name: inscriptions, label: Coût de l'inscription, widget: list, default: ['x €'] }
-      - { name: link, label: Lien vers l'événement ou l'affiche }
+      - { name: inscriptions, label: Coût de l'inscription, widget: list, default: ['x €'], required: false }
+      - { name: link, label: Lien vers l'événement ou l'affiche, required: false }
       - { name: body, label: Description, widget: markdown, required: false }
 
