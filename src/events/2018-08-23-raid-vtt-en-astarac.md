@@ -1,7 +1,7 @@
 ---
 title: Raid VTT en Astarac
 date: '2018-09-01T08:30:00+02:00'
-commune: Simorre
+commune: 'Stade des Tuileries, Simorre'
 departement: '32'
 boucles:
   - distance: '20'
