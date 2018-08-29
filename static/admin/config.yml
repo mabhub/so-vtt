@@ -21,22 +21,12 @@ collections:
       - { name: date, label: Date de l'événement, widget: datetime }
       - { name: commune, label: Lieu de l'événement }
       - { name: departement, label: Département }
-      - name: boucles
-        label: boucles
-        widget: list
-        fields:
-        - name: distance
-          label: Distance (en km)
-          widget: number
-        - name: sport
-          label: Pratique
-          widget: select
-          default: vtt
-          options:
-          - { label: VTT, value: vtt }
-          - { label: Route, value: route }
-          - { label: Marche, value: marche }
-          - { label: Trail, value: trail }
+
+      - { name: boucles_vtt, label: Boucles VTT, widget: list, default: ['x km', 'y km'], required: true }
+      - { name: boucles_route, label: Boucles Route, widget: list, required: false }
+      - { name: boucles_marche, label: Boucles Marche, widget: list, required: false }
+      - { name: boucles_trail, label: Boucles Trail, widget: list, required: false }
+
       - { name: inscriptions, label: Coût de l'inscription, widget: list, default: ['x €'], required: false }
       - { name: link, label: Lien vers l'événement ou l'affiche, required: false }
       - { name: body, label: Description, widget: markdown, required: false }
