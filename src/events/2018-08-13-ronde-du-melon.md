@@ -9,11 +9,11 @@ boucles:
   - distance: '10.5'
     sport: marche
   - distance: '39'
-    sport: cyclo
+    sport: route
   - distance: '58'
-    sport: cyclo
+    sport: route
   - distance: '80'
-    sport: cyclo
+    sport: route
 inscriptions:
   - 5 €
   - +3 € (casse-croûte)

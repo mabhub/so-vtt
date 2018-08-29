@@ -17,7 +17,7 @@ const Legende = () => (
   <Styled.Legende>
     {/* <LabelGroup items={['Départ']} tooltip="Départ" /> */}
     <LabelGroup items={['VTT']} icon={<Cycliste />} color="#aaf" tooltip="VTT" />
-    <LabelGroup items={['Cyclo']} icon={<Cycliste vtt={false} />} color="#8cd" tooltip="Cyclo" />
+    <LabelGroup items={['Route']} icon={<Cycliste vtt={false} />} color="#8cd" tooltip="Route" />
     <LabelGroup items={['Marche']} icon={<Marcheur />} color="#ece" tooltip="Marche" />
     <LabelGroup items={['Trail']} icon={<Coureur />} color="#ec8" tooltip="Trail / Cross" />
     {/* <LabelGroup items={['Inscription']} color="#bfb" tooltip="Inscription" /> */}
@@ -36,7 +36,7 @@ const AgendaIndex = props => {
           ...node.frontmatter.boucles_vtt.map(distance => ({ distance, sport: null })),
           ...node.frontmatter.boucles_marche.map(distance => ({ distance, sport: 'marche' })),
           ...node.frontmatter.boucles_trail.map(distance => ({ distance, sport: 'trail' })),
-          ...node.frontmatter.boucles_route.map(distance => ({ distance, sport: 'cyclo' })),
+          ...node.frontmatter.boucles_route.map(distance => ({ distance, sport: 'route' })),
         ];
       } else {
         node.frontmatter.boucles = node.frontmatter.boucles.map(boucle => ({ ...boucle, distance: boucle.distance + ' km' }));

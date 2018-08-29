@@ -15,8 +15,8 @@ const Event = props => {
     .filter(({ sport }) => !sport || sport === 'vtt')
     .map(item => item.distance);
 
-  const distancesCyclo = props.frontmatter.boucles
-    .filter(({ sport }) => sport === 'cyclo')
+  const distancesRoute = props.frontmatter.boucles
+    .filter(({ sport }) => sport === 'route')
     .map(item => item.distance);
 
   const distancesMarche = props.frontmatter.boucles
@@ -41,7 +41,7 @@ const Event = props => {
         <Styled.Title>{props.frontmatter.title}</Styled.Title>
 
         <LabelGroup items={distancesVTT} icon={<Cycliste />} color="#aaf" tooltip="VTT" />
-        <LabelGroup items={distancesCyclo} icon={<Cycliste vtt={false} />} color="#8cd" tooltip="Cyclo" />
+        <LabelGroup items={distancesRoute} icon={<Cycliste vtt={false} />} color="#8cd" tooltip="Route" />
         <LabelGroup items={distancesMarche} icon={<Marcheur />} color="#ece" tooltip="Marche" />
         <LabelGroup items={distancesTrail} icon={<Coureur />} color="#ec8" tooltip="Trail / Cross" />
         <br />

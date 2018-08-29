@@ -9,9 +9,9 @@ boucles:
   - distance: '40'
   - distance: '50'
   - distance: '55'
-    sport: cyclo
+    sport: route
   - distance: '85'
-    sport: cyclo
+    sport: route
   - distance: '14'
     sport: marche
   - distance: '15'

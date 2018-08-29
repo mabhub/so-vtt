@@ -9,13 +9,13 @@ boucles:
   - distance: '10'
     sport: marche
   - distance: '30'
-    sport: cyclo
+    sport: route
   - distance: '40'
-    sport: cyclo
+    sport: route
   - distance: '70'
-    sport: cyclo
+    sport: route
   - distance: '100'
-    sport: cyclo
+    sport: route
 inscriptions:
   - 5 €
   - Gratuit pour les licenciés FFCT

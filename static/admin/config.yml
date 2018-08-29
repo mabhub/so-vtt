@@ -34,7 +34,7 @@ collections:
           default: vtt
           options:
           - { label: VTT, value: vtt }
-          - { label: Cyclo, value: cyclo }
+          - { label: Route, value: route }
           - { label: Marche, value: marche }
           - { label: Trail, value: trail }
       - { name: inscriptions, label: Coût de l'inscription, widget: list, default: ['x €'], required: false }
