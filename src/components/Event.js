@@ -13,19 +13,19 @@ const Event = props => {
 
   const distancesVTT = props.frontmatter.boucles
     .filter(({ sport }) => !sport || sport === 'vtt')
-    .map(item => `${item.distance} km`);
+    .map(item => item.distance);
 
   const distancesCyclo = props.frontmatter.boucles
     .filter(({ sport }) => sport === 'cyclo')
-    .map(item => `${item.distance} km`);
+    .map(item => item.distance);
 
   const distancesMarche = props.frontmatter.boucles
     .filter(({ sport }) => sport === 'marche')
-    .map(item => `${item.distance} km`);
+    .map(item => item.distance);
 
   const distancesTrail = props.frontmatter.boucles
     .filter(({ sport }) => sport === 'trail')
-    .map(item => `${item.distance} km`);
+    .map(item => item.distance);
 
   return (
     <Styled.Event>

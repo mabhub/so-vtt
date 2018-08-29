@@ -30,6 +30,18 @@ const AgendaIndex = props => {
   const events = get(props, 'data.allMarkdownRemark.edges')
     .map(({ node }, index, full) => {
       const previous = full[index - 1] && full[index - 1].node;
+
+      if (!node.frontmatter.boucles) {
+        node.frontmatter.boucles = [
+          ...node.frontmatter.boucles_vtt.map(distance => ({ distance, sport: null })),
+          ...node.frontmatter.boucles_marche.map(distance => ({ distance, sport: 'marche' })),
+          ...node.frontmatter.boucles_trail.map(distance => ({ distance, sport: 'trail' })),
+          ...node.frontmatter.boucles_route.map(distance => ({ distance, sport: 'cyclo' })),
+        ];
+      } else {
+        node.frontmatter.boucles = node.frontmatter.boucles.map(boucle => ({ ...boucle, distance: boucle.distance + ' km' }));
+      }
+
       return {
         ...node,
         newMonth: !previous || previous.frontmatter.month !== node.frontmatter.month,
@@ -75,6 +87,10 @@ export const pageQuery = graphql`
               distance
               sport
             }
+            boucles_vtt
+            boucles_route
+            boucles_marche
+            boucles_trail
           }
         }
       }
