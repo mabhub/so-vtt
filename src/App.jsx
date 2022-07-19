@@ -1,22 +1,27 @@
-import { useState } from 'react';
-import { Button, Container } from '@mui/material';
+import React from 'react';
+import { Container } from '@mui/material';
+import Form from '@rjsf/material-ui/v5';
+
+import schema from './schema.json';
+import uiSchema from './ui-schema.json';
 
 const App = () => {
-  const [count, setCount] = useState(0);
+  const handleFormChange = React.useCallback(event => {
+    console.log('form change', event);
+  }, []);
+
+  const handleFormSubmit = React.useCallback(event => {
+    console.log('form submit', event);
+  }, []);
 
   return (
     <Container>
-      <header className="App-header">
-        <p>Hello Vite + React!</p>
-        <p>
-          <Button
-            onClick={() => setCount(c => c + 1)}
-            variant="outlined"
-          >
-            count is: {count}
-          </Button>
-        </p>
-      </header>
+      <Form
+        schema={schema}
+        uiSchema={uiSchema}
+        onChange={handleFormChange}
+        onSubmit={handleFormSubmit}
+      />
     </Container>
   );
 };
