@@ -10,11 +10,18 @@ import { Controller } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import useDebounce from '../useDebounce';
 
+const NO_RESULT = [{ label: 'Saisir une adresse', disabled: true }];
+
 const fetchAddresses = async (q = '') => {
-  if (!q) { return []; }
+  if (!q) { return NO_RESULT; }
   const response = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${q}&limit=10`);
   const result = await response.json();
-  return result?.features?.map(({ properties }) => properties) || [];
+
+  if (result?.features?.length) {
+    return result.features.map(({ properties }) => properties);
+  }
+
+  return NO_RESULT;
 };
 
 const CAutoComplete = (({ name, control, rules, ...props }) => {
@@ -44,14 +51,17 @@ const CAutoComplete = (({ name, control, rules, ...props }) => {
           {...props}
           {...field}
           id={`${name}-id`}
-          onChange={(ev, value) => field.onChange(value)}
+          onChange={(event, value) => field.onChange(value)}
           isOptionEqualToValue={(option, value) => option.label === value.label}
           getOptionLabel={option => option.label}
+          getOptionDisabled={({ disabled }) => disabled}
+          filterOptions={option => option}
           options={options}
           loading={isLoading}
           onInputChange={handleInputChange}
           renderInput={params => (
             <TextField
+              required={props.required}
               {...params}
               error={Boolean(error)}
               label={props.label}
