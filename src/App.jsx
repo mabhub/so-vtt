@@ -17,7 +17,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useFieldArray, useForm } from 'react-hook-form';
 import CTextField from './components/CTextField';
 import CDatePicker from './components/CDatePicker';
-import CAutoComplete from './components/CAutoComplete';
+import CSearchAddress from './components/CSearchAddress';
 import CSelect from './components/CSelect';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
@@ -70,7 +70,7 @@ const App = () => {
               />
             </Stack>
 
-            <CAutoComplete
+            <CSearchAddress
               label="Lieu"
               name="place"
               control={control}

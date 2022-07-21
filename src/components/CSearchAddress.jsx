@@ -24,7 +24,7 @@ const fetchAddresses = async (q = '') => {
   return NO_RESULT;
 };
 
-const CAutoComplete = (({ name, control, rules, ...props }) => {
+const CSearchAddress = (({ name, control, rules, ...props }) => {
   const [input, setInput] = React.useState('');
   const handleInputChange = React.useCallback((event, value) => setInput(value.trim()), []);
   const debouncedInput = useDebounce(input, 500);
@@ -82,4 +82,4 @@ const CAutoComplete = (({ name, control, rules, ...props }) => {
   );
 });
 
-export default CAutoComplete;
+export default CSearchAddress;
