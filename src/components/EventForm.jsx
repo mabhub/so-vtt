@@ -42,7 +42,7 @@ const EventForm = () => {
   };
 
   return (
-    <Box p={4}>
+    <Box>
       <Typography variant="h1">Ajouter une rando</Typography>
 
       <form onSubmit={handleSubmit(handleFormSubmit)}>
