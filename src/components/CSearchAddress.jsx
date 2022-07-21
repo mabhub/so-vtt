@@ -53,7 +53,7 @@ const CSearchAddress = (({ name, control, rules, ...props }) => {
           id={`${name}-id`}
           onChange={(event, value) => field.onChange(value)}
           isOptionEqualToValue={(option, value) => option.label === value.label}
-          getOptionLabel={option => option.label}
+          getOptionLabel={({ label }) => label}
           getOptionDisabled={({ disabled }) => disabled}
           filterOptions={option => option}
           options={options}

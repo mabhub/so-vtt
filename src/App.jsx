@@ -78,6 +78,22 @@ const App = () => {
               required
             />
 
+            <CTextField
+              label="Commentaire / détails"
+              name="comment"
+              helperText={(
+                <>
+                  Par exemple :{' '}
+                  Heures de départ, obligation de port du casque,{' '}
+                  prix de l'inscription, départ libre ou groupé, repas possible sur place…
+                </>
+              )}
+              control={control}
+              rows={2}
+              multiline
+              fullWidth
+            />
+
             <Paper
               sx={{ border: '4px dashed #eee', p: 1 }}
               elevation={0}
@@ -151,22 +167,6 @@ const App = () => {
                 Ajouter une boucle
               </Button>
             </Paper>
-
-            <CTextField
-              label="Commentaire / détails"
-              name="comment"
-              helperText={(
-                <>
-                  Par exemple :{' '}
-                  Heures de départ, obligation de port du casque,{' '}
-                  prix de l'inscription, repas possible sur place…
-                </>
-              )}
-              control={control}
-              rows={2}
-              multiline
-              fullWidth
-            />
 
             <CTextField
               label="Lien"
