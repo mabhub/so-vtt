@@ -10,10 +10,13 @@ import {
   Typography,
 } from '@mui/material';
 
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import AddIcon from '@mui/icons-material/Add';
-
+import {
+  Add as AddIcon,
+  DeleteForever as DeleteForeverIcon,
+} from '@mui/icons-material';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+
 import CTextField from './CTextField';
 import CDatePicker from './CDatePicker';
 import CSearchAddress from './CSearchAddress';
@@ -34,11 +37,23 @@ const EventForm = () => {
     },
   });
 
+  const creationMutation = useMutation(async data => {
+    const raw = await fetch(
+      '/.netlify/functions/create',
+      {
+        method: 'POST',
+        body: JSON.stringify(data, null, 2),
+      },
+    );
+
+    return raw.text();
+  });
+
   const { fields, append, remove } = useFieldArray({ control, name: 'loops' });
 
-  const handleFormSubmit = values => {
-    console.log(values);
-    console.log(JSON.stringify(values, null, 2));
+  const handleFormSubmit = async values => {
+    const response = await creationMutation.mutateAsync(values);
+    console.log(response);
   };
 
   return (

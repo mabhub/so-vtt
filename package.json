@@ -7,6 +7,7 @@
     "lint": "eslint . --ext js,jsx",
     "serve": "vite preview",
     "start": "vite",
+    "server:start": "netlify functions:serve --functions netlify/functions",
     "version": "git changelog -n -t $npm_package_version && git add CHANGELOG.md"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "eslint": "^8.20.0",
-    "eslint-config-airbnb": "^19.0.4"
+    "eslint-config-airbnb": "^19.0.4",
+    "netlify-cli": "^10.10.2"
   }
 }
