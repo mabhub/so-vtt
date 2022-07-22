@@ -1,4 +1,6 @@
+import React from 'react';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Box,
@@ -9,6 +11,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
+
+import { LoadingButton } from '@mui/lab';
 
 import {
   Add as AddIcon,
@@ -30,15 +34,24 @@ const EventForm = () => {
   const {
     control,
     handleSubmit,
+    formState: { isDirty, isValid },
   } = useForm({
+    mode: 'onChange',
     defaultValues: {
       name: '',
       date: DATE_TODAY,
+      loops: [
+        { sport: 'vtt' },
+      ],
     },
   });
 
+  const navigate = useNavigate();
+  const [lock, setLock] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState(null);
+
   const creationMutation = useMutation(async data => {
-    const raw = await fetch(
+    const response = await fetch(
       '/.netlify/functions/create',
       {
         method: 'POST',
@@ -46,14 +59,34 @@ const EventForm = () => {
       },
     );
 
-    return raw.text();
+    return response;
   });
 
-  const { fields, append, remove } = useFieldArray({ control, name: 'loops' });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'loops',
+  });
 
   const handleFormSubmit = async values => {
+    setLock(true);
     const response = await creationMutation.mutateAsync(values);
-    console.log(response);
+
+    if (response.status === 201) {
+      navigate('/created', { replace: true });
+      return response;
+    }
+
+    if (response.status >= 400) {
+      try {
+        const { message } = await response.json();
+        setSubmitError(message || response.statusText);
+      } catch (error) {
+        console.error(error); // eslint-disable-line no-console
+      }
+      setLock(false);
+    }
+
+    return response;
   };
 
   return (
@@ -67,8 +100,9 @@ const EventForm = () => {
               label="Date"
               name="date"
               control={control}
+              disabled={lock}
               required
-              // rules={{ required: true }}
+              rules={{ required: true }}
               disablePast
               fullWidth
               inputFormat={DATE_FORMAT}
@@ -78,6 +112,7 @@ const EventForm = () => {
               label="Nom de l'évènement"
               name="name"
               control={control}
+              disabled={lock}
               rules={{ required: true }}
               required
               fullWidth
@@ -88,6 +123,7 @@ const EventForm = () => {
             label="Lieu"
             name="place"
             control={control}
+            disabled={lock}
             rules={{ required: true }}
             required
           />
@@ -103,29 +139,25 @@ const EventForm = () => {
               </>
             )}
             control={control}
+            disabled={lock}
             rows={2}
             multiline
             fullWidth
           />
 
           <Paper
-            sx={{ border: '4px dashed #eee', p: 1 }}
+            sx={{ border: '4px dashed #ccc', p: 1, pt: 2 }}
             elevation={0}
             component={Stack}
             spacing={2}
           >
-            {!fields.length && (
-              <Typography sx={{ textAlign: 'center', fontStyle: 'italic' }}>
-                Aucune boucle pour le moment
-              </Typography>
-            )}
-
             {fields.map((field, index) => (
               <Stack spacing={2} key={field.id} direction="row">
                 <CSelect
                   label="Pratique"
                   name={`loops.${index}.sport`}
                   control={control}
+                  disabled={lock}
                   required
                 >
                   {[
@@ -143,6 +175,7 @@ const EventForm = () => {
                   placeholder="Longueur de la boucle (en km)"
                   name={`loops.${index}.distance`}
                   control={control}
+                  disabled={lock}
                   fullWidth
                   inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                 />
@@ -152,6 +185,7 @@ const EventForm = () => {
                   placeholder="Dénivelé positif (en m)"
                   name={`loops.${index}.elevation`}
                   control={control}
+                  disabled={lock}
                   fullWidth
                   inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                 />
@@ -160,16 +194,20 @@ const EventForm = () => {
                   label="Complément d'info."
                   name={`loops.${index}.comment`}
                   control={control}
+                  disabled={lock}
                   fullWidth
                   multiline
                 />
 
-                <IconButton
-                  sx={{ alignSelf: 'center' }}
-                  onClick={() => remove(index)}
-                >
-                  <DeleteForeverIcon />
-                </IconButton>
+                {(fields.length > 1) && (
+                  <IconButton
+                    sx={{ alignSelf: 'center' }}
+                    onClick={() => remove(index)}
+                    disabled={lock}
+                  >
+                    <DeleteForeverIcon />
+                  </IconButton>
+                )}
               </Stack>
             ))}
 
@@ -177,6 +215,7 @@ const EventForm = () => {
               variant="outlined"
               onClick={() => append({ sport: 'vtt' })}
               startIcon={<AddIcon />}
+              disabled={lock}
             >
               Ajouter une boucle
             </Button>
@@ -192,15 +231,18 @@ const EventForm = () => {
               </>
             )}
             control={control}
+            disabled={lock}
             fullWidth
           />
 
-          <Button
+          <LoadingButton
+            loading={lock}
             type="submit"
             variant="contained"
+            disabled={!isDirty || !isValid}
           >
             Envoyer
-          </Button>
+          </LoadingButton>
         </Stack>
       </form>
     </Box>

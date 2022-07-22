@@ -7,13 +7,15 @@ import {
 import Layout from './components/Layout';
 import List from './components/List';
 import EventForm from './components/EventForm';
+import Thanks from './components/Thanks';
 
 const App = () => (
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/create" element={<EventForm />} />
         <Route index element={<List />} />
+        <Route path="/create" element={<EventForm />} />
+        <Route path="/created" element={<Thanks />} />
       </Route>
     </Routes>
   </BrowserRouter>

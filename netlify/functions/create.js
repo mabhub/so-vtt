@@ -60,7 +60,7 @@ exports.handler = async ({ httpMethod, body }) => {
 
   const srcEvent = JSON.parse(body);
 
-  if (!srcEvent.loops) {
+  if (!srcEvent?.loops?.length) {
     return {
       statusCode: 400, // Bad Request
       body: JSON.stringify({ message: 'At least 1 loop is required' }),
