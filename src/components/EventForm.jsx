@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 
 import {
+  Alert,
   Box,
   Button,
   IconButton,
@@ -69,6 +70,8 @@ const EventForm = () => {
 
   const handleFormSubmit = async values => {
     setLock(true);
+    setSubmitError(null);
+
     const response = await creationMutation.mutateAsync(values);
 
     if (response.status === 201) {
@@ -79,11 +82,18 @@ const EventForm = () => {
     if (response.status >= 400) {
       try {
         const { message } = await response.json();
-        setSubmitError(message || response.statusText);
+
+        setSubmitError({
+          status: response.status,
+          statusText: response.statusText,
+          message,
+        });
       } catch (error) {
         console.error(error); // eslint-disable-line no-console
       }
     }
+
+    await new Promise(res => { setTimeout(res, 2000); });
 
     setLock(false);
     return response;
@@ -243,6 +253,12 @@ const EventForm = () => {
           >
             Envoyer
           </LoadingButton>
+
+          {submitError && (
+            <Alert severity={submitError.status >= 500 ? 'error' : 'warning'}>
+              {submitError.message || submitError.statusText}
+            </Alert>
+          )}
         </Stack>
       </form>
     </Box>
