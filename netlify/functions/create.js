@@ -4,8 +4,25 @@ const headers = {
 };
 
 const POST = { method: 'POST', headers };
+const GET = { method: 'GET', headers };
 const maxLoops = 20;
 const validUrl = /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/ig;
+
+const getLastEvent = async () => {
+  const response = await fetch(
+    [
+      `https://api.baserow.io/api/database/rows/table/${process.env.BASEROW_EVENTS_TABLE}/?`,
+      'user_field_names=true',
+      'size=1',
+      'order_by=-created',
+      'include=created',
+    ].join('&'),
+    { ...GET },
+  );
+
+  const { results: [firstResult = {}] } = await response.json();
+  return firstResult;
+};
 
 const prepareEvent = ({ loops, ...rest }) => {
   const date = rest.date.split('T')[0];
@@ -75,6 +92,18 @@ exports.handler = async ({ httpMethod, body }) => {
   }
 
   try {
+    const { created } = await getLastEvent();
+    const then = new Date(created);
+    const now = new Date();
+    const delta = now - then;
+
+    if (delta < 10000) {
+      return {
+        statusCode: 429,
+        body: JSON.stringify({ message: 'Please wait a few seconds before retrying' }),
+      };
+    }
+
     const event = await createEvent(prepareEvent(srcEvent));
     const loops = await Promise.all(srcEvent.loops.map(createLoop(event)));
 
@@ -83,6 +112,7 @@ exports.handler = async ({ httpMethod, body }) => {
       body: JSON.stringify({ event, loops }, null, 2),
     };
   } catch (error) {
+    console.error(error); // eslint-disable-line no-console
     return {
       statusCode: 500,
       body: JSON.stringify(error),
