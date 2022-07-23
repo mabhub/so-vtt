@@ -1,3 +1,12 @@
+const fetch = async (...args) => {
+  if (global.fetch) {
+    return global.fetch;
+  }
+
+  const { default: f } = await import('node-fetch'); // eslint-disable-line import/no-unresolved
+  return f(...args);
+};
+
 const headers = {
   Authorization: `Token ${process.env.BASEROW_WRITE}`,
   'Content-Type': 'application/json',
